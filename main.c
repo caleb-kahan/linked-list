@@ -7,6 +7,7 @@ struct node { int i;
               struct node *next;
             };
 struct node *insert_front(struct node *nody, int data);
+struct node *remove(struct node *front, int data);
 
 void print_list(struct node *nody){
     printf("Printing list: [ ");
@@ -31,4 +32,10 @@ struct node * insert_front(struct node *nody, int data){
     newNode->i = data;
     newNode->next = nody;
     return newNode;
+}
+struct node * remove(struct node *front, int data){
+  currentNode = *front;
+  while(currentNode){
+    if(currentNode.i == data)
+  }
 }
