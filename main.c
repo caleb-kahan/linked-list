@@ -18,22 +18,17 @@ void print_list(struct node *nody){
     printf("]\n");
 }
 int main(){
-  struct node *list = calloc(10,sizeof(struct node));
-  struct node nody;
-  nody.i = 1;
-  list[0] = nody;
-
+  struct node *list = malloc(sizeof(struct node));
+  list->i = 1;
+  list->next = 0;
 
   list = insert_front(list,99);
   print_list(list);
-  free(list);
   return 0;
 }
 struct node * insert_front(struct node *nody, int data){
-    struct node newNode;
-    newNode.i = data;
-    newNode.next = nody;
-
-    struct node *longNody = realloc(nody,sizeof(nody)+sizeof(struct node));
-    return longNody;
+    struct node *newNode = malloc(sizeof(struct node));
+    newNode->i = data;
+    newNode->next = nody;
+    return newNode;
 }
