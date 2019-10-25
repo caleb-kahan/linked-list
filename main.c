@@ -3,8 +3,10 @@
 #include <stdlib.h>
 
 
-struct node { int i; struct node *next;};
-struct node * insert_front(struct node *nody, int data);
+struct node { int i;
+              struct node *next;
+            };
+struct node *insert_front(struct node *nody, int data);
 
 void print_list(struct node *nody){
     printf("Printing list: [ ");
