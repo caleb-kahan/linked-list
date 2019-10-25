@@ -26,6 +26,7 @@ int main(){
 
   list = insert_front(list,99);
   print_list(list);
+  free(list);
   return 0;
 }
 struct node * insert_front(struct node *nody, int data){
