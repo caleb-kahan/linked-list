@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,7 +6,7 @@ struct node { int i;
               struct node *next;
             };
 struct node *insert_front(struct node *nody, int data);
-struct node *remove(struct node *front, int data);
+struct node *remove_node(struct node *front, int data);
 
 void print_list(struct node *nody){
     printf("Printing list: [ ");
@@ -21,9 +20,13 @@ void print_list(struct node *nody){
 int main(){
   struct node *list = malloc(sizeof(struct node));
   list->i = 1;
-  list->next = 0;
+  list->next = NULL;
 
   list = insert_front(list,99);
+  print_list(list);
+  //list = remove_node(list,1);
+  list = remove_node(list,99);
+  list = remove_node(list,1);
   print_list(list);
   return 0;
 }
@@ -33,9 +36,22 @@ struct node * insert_front(struct node *nody, int data){
     newNode->next = nody;
     return newNode;
 }
-struct node * remove(struct node *front, int data){
-  currentNode = *front;
-  while(currentNode){
-    if(currentNode.i == data)
+
+struct node *remove_node(struct node *front, int data){
+  if(front->i == data){
+      struct node *returner = front->next;
+      free(front);
+      return returner;
   }
+    
+  struct node *currentNode = front; 
+  while(currentNode->next){
+    if(currentNode->next->i == data){
+        currentNode->next = currentNode->next->next;
+        free(currentNode->next);
+        return front;
+    }
+    currentNode = currentNode->next;
+  }
+  return front;
 }
