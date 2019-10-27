@@ -10,11 +10,13 @@ struct node *remove_node(struct node *front, int data);
 
 void print_list(struct node *nody){
     printf("Printing list: [ ");
-    while(nody->next){
+    if(nody != NULL){
+      while(nody->next){
+        printf("%d ", nody->i);
+        nody = nody->next;
+      }
       printf("%d ", nody->i);
-      nody = nody->next;
     }
-    printf("%d ", nody->i);
     printf("]\n");
 }
 int main(){
@@ -26,6 +28,7 @@ int main(){
   print_list(list);
   //list = remove_node(list,1);
   list = remove_node(list,99);
+  print_list(list);
   list = remove_node(list,1);
   print_list(list);
   return 0;
@@ -43,12 +46,13 @@ struct node *remove_node(struct node *front, int data){
       free(front);
       return returner;
   }
-    
-  struct node *currentNode = front; 
+
+  struct node *currentNode = front;
   while(currentNode->next){
     if(currentNode->next->i == data){
+        struct node *deadNode = currentNode->next;
         currentNode->next = currentNode->next->next;
-        free(currentNode->next);
+        free(deadNode);
         return front;
     }
     currentNode = currentNode->next;
