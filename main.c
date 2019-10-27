@@ -7,7 +7,7 @@ struct node { int i;
             };
 struct node *insert_front(struct node *nody, int data);
 struct node *remove_node(struct node *front, int data);
-struct node * free_list(struct node *list)
+struct node * free_list(struct node *list);
 void print_list(struct node *nody){
     printf("Printing list: [ ");
     if(nody != NULL){
@@ -31,6 +31,11 @@ int main(){
   print_list(list);
   list = remove_node(list,1);
   print_list(list);
+  list = insert_front(list,1);
+  list = insert_front(list,99);
+  print_list(list);
+  free_list(list);
+  print_list(list);
   return 0;
 }
 struct node * insert_front(struct node *nody, int data){
@@ -48,7 +53,7 @@ struct node *remove_node(struct node *front, int data){
   }
 
   struct node *currentNode = front;
-  while(currentNode->next){
+  while(currentNode){
     if(currentNode->next->i == data){
         struct node *deadNode = currentNode->next;
         currentNode->next = currentNode->next->next;
@@ -61,7 +66,7 @@ struct node *remove_node(struct node *front, int data){
 }
 struct node * free_list(struct node *list){
   while(list != NULL){
-    list = remove_node(list->i,list->i)
+    list = remove_node(list,list->i);
   }
-
+  return list;
 }
