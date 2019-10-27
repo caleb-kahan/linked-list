@@ -1,10 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "header.h"
-
-struct node { int i;
-              struct node *next;
-            };
+#include <stdlib.h>
 
 int main(){
   struct node *list = malloc(sizeof(struct node));
