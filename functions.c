@@ -17,10 +17,13 @@ struct node *remove_node(struct node *front, int data){
   }
 
   struct node *currentNode = front;
-  while(currentNode){
+  while(currentNode->next){
     if(currentNode->next->i == data){
         struct node *deadNode = currentNode->next;
-        currentNode->next = currentNode->next->next;
+        if(currentNode->next->next)
+          currentNode->next = currentNode->next->next;
+        else
+          currentNode->next = NULL;
         free(deadNode);
         return front;
     }
@@ -30,6 +33,7 @@ struct node *remove_node(struct node *front, int data){
 }
 struct node * free_list(struct node *list){
   while(list != NULL){
+    printf("freeing node: %d\n",list->i);
     list = remove_node(list,list->i);
   }
   return list;
